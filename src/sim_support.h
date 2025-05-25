@@ -109,6 +109,9 @@ extern u32 PRINT_STATE_DIFF;
 #endif
 char simValidMem(u32 address); // Interface for rsp (GDB) server
 
+char simDebugRead(u32 address, unsigned char* value);
+char simDebugWrite(u32 address, unsigned char value);
+
 
 //struct MEMMAPIO {
 //  u32 *cycleCountLSB;

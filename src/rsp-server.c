@@ -2469,7 +2469,7 @@ rsp_insert_matchpoint (struct rsp_buf *buf)
 	 We make sure th instruction cache is invalidated first, so that the
 	 read and write always work correctly. */
       //addr -=4; // Because of PC points to 4 ahead.
-      simLoadInsn(addr,&instr);
+      simLoadInsn(addr,(u16*)&instr);
       mp_hash_add (type, addr, instr);
       put_str_packet ("OK");
       return;
@@ -2535,7 +2535,7 @@ void rsp_check_stall()
 
 void rsp_check_watch(unsigned int addr)
 {
-  const char buff[30];
+  char buff[30];
   if( addr != WATCHPOINT_ADDR )
   {
   if( NULL != mp_hash_lookup(WP_WRITE, addr))

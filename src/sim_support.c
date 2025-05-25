@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <string.h>
+
 #if MD5
    #include <openssl/md5.h>
 #endif
@@ -17,7 +19,7 @@ u32 addrOfRestoreCP = 0;
 u32 do_reset = 0;
 u32 wdt_seed = 0;
 u32 wdt_val = 0;
-u32 md5[4] = {0,0,0,0,0};
+u32 md5[4] = {0,0,0,0};
 u32 PRINT_STATE_DIFF = PRINT_STATE_DIFF_INIT;
 #if MEM_COUNT_INST
   u32 store_count = 0;
@@ -39,7 +41,7 @@ int addressReads = 0;
 // Essentially creates a new block of addresses on the bus of the processor that only the debug read and write commands can access
 //MEMMAPIO mmio = {.cycleCountLSB = &cycleCount, .cycleCountMSB = &cycleCount+4,
 //                 .cyclesSince = &cyclesSinceReset, .resetAfter = &resetAfterCycles};
-u32* mmio[] = {&cycleCount, ((u32*)&cycleCount)+1, &wastedCycles, ((u32*)&wastedCycles)+1,
+u32* mmio[] = {(u32*)&cycleCount, ((u32*)&cycleCount)+1, (u32*)&wastedCycles, ((u32*)&wastedCycles)+1,
   &cyclesSinceReset, &cyclesSinceCP, &addrOfCP, &addrOfRestoreCP, 
   &resetAfterCycles, &do_reset, &PRINT_STATE_DIFF, &wdt_seed, 
   &wdt_val, &(md5[0]), &(md5[1]), &(md5[2]), 
@@ -235,7 +237,7 @@ char containsAddress(const ADDRESS_LIST *pList, const u32 pAddress)
 // Returns 0 if already present, 1 if added to end
 char addAddress(const ADDRESS_LIST *pList, const u32 pAddress)
 {
-  ADDRESS_LIST *temp = pList;
+  ADDRESS_LIST *temp = (ADDRESS_LIST*)pList;
   ADDRESS_LIST *temp_prev;
 
   // Go to the end of the list
