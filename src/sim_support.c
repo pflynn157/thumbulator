@@ -173,8 +173,8 @@ void sim_command(void)
   {
     if(cpu_get_sp() < 0X40010000)
     {
-      fprintf(stderr, "SP crosses heap: 0x%8.8X\n", cpu_get_sp());
-      fprintf(stderr, "PC: 0x%8.8X\n", cpu_get_pc());
+      //fprintf(stderr, "SP crosses heap: 0x%8.8X\n", cpu_get_sp());
+      //fprintf(stderr, "PC: 0x%8.8X\n", cpu_get_pc());
     }
   }
 

@@ -1656,7 +1656,7 @@ rsp_write_mem (struct rsp_buf *buf)
   /* Write the bytes to memory */
   for (off = 0; off < len; off++)
     {
-      if (!isValidMem(addr + off))
+      if (!simValidMem(addr + off))
 	{
 	  /* The error number doesn't matter. The GDB client will substitute
 	     its own */

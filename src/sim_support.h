@@ -34,7 +34,7 @@ char simLoadData_internal(u32 address, u32 *value, u32 falseRead); // falseRead 
 char simStoreData(u32 address, u32 value);
 
 // Controls whether the program output prints to the simulator's console or is not printed at all
-#define DISABLE_PROGRAM_PRINTING 1
+#define DISABLE_PROGRAM_PRINTING 0
 
 // Simulator debugging
 #define PRINT_INST 0                                    // diss_printf(): disassembly printing?
@@ -59,7 +59,7 @@ char simStoreData(u32 address, u32 value);
 // Macros for Ratchet
 #define PRINT_CHECKPOINTS 0                 // Print checkpoint info
 #define MEM_COUNT_INST 0                    // Track and report program loads, stores, and checkpoints
-#define PRINT_MEM_OPS 1                     // Prints detailed info for each program-generated memory access (Clank)
+#define PRINT_MEM_OPS 0                     // Prints detailed info for each program-generated memory access (Clank)
 #define INCREMENT_CYCLES(x) {\
   cycleCount += x;           \
   cyclesSinceReset += x;     \
@@ -104,8 +104,8 @@ extern u32 PRINT_STATE_DIFF;
 #if HOOK_GPR_ACCESSES
     void do_nothing(void);
     void report_sp(void);
-    void (* gprReadHooks[16])(void);
-    void (* gprWriteHooks[16])(void);
+    extern void (* gprReadHooks[16])(void);
+    extern void (* gprWriteHooks[16])(void);
 #endif
 char simValidMem(u32 address); // Interface for rsp (GDB) server
 
